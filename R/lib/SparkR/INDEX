@@ -3,52 +3,9 @@
 AFTSurvivalRegressionModel-class
                         S4 class that represents a
                         AFTSurvivalRegressionModel
-ALSModel-class          S4 class that represents an ALSModel
-BisectingKMeansModel-class
-                        S4 class that represents a BisectingKMeansModel
-DecisionTreeClassificationModel-class
-                        S4 class that represents a
-                        DecisionTreeClassificationModel
-DecisionTreeRegressionModel-class
-                        S4 class that represents a
-                        DecisionTreeRegressionModel
-FPGrowthModel-class     S4 class that represents a FPGrowthModel
-GBTClassificationModel-class
-                        S4 class that represents a
-                        GBTClassificationModel
-GBTRegressionModel-class
-                        S4 class that represents a GBTRegressionModel
-GaussianMixtureModel-class
-                        S4 class that represents a GaussianMixtureModel
-GeneralizedLinearRegressionModel-class
-                        S4 class that represents a generalized linear
-                        model
-GroupedData-class       S4 class that represents a GroupedData
-IsotonicRegressionModel-class
-                        S4 class that represents an
-                        IsotonicRegressionModel
-KMeansModel-class       S4 class that represents a KMeansModel
-KSTest-class            S4 class that represents an KSTest
-LDAModel-class          S4 class that represents an LDAModel
-LinearSVCModel-class    S4 class that represents an LinearSVCModel
-LogisticRegressionModel-class
-                        S4 class that represents an
-                        LogisticRegressionModel
-MultilayerPerceptronClassificationModel-class
-                        S4 class that represents a
-                        MultilayerPerceptronClassificationModel
-NaiveBayesModel-class   S4 class that represents a NaiveBayesModel
-RandomForestClassificationModel-class
-                        S4 class that represents a
-                        RandomForestClassificationModel
-RandomForestRegressionModel-class
-                        S4 class that represents a
-                        RandomForestRegressionModel
-SparkDataFrame-class    S4 class that represents a SparkDataFrame
-StreamingQuery-class    S4 class that represents a StreamingQuery
-WindowSpec-class        S4 class that represents a WindowSpec
 agg                     summarize
 alias                   alias
+ALSModel-class          S4 class that represents an ALSModel
 approxQuantile          Calculates the approximate quantiles of
                         numerical columns of a SparkDataFrame
 arrange                 Arrange Rows by Variables
@@ -61,6 +18,8 @@ attach,SparkDataFrame-method
 avg                     avg
 awaitTermination        awaitTermination
 between                 between
+BisectingKMeansModel-class
+                        S4 class that represents a BisectingKMeansModel
 broadcast               broadcast
 cache                   Cache
 cacheTable              Cache Table
@@ -78,15 +37,15 @@ column                  S4 class that represents a SparkDataFrame
                         column
 column_aggregate_functions
                         Aggregate functions for Column operations
+column_avro_functions   Avro processing functions for Column operations
 column_collection_functions
                         Collection functions for Column operations
 column_datetime_diff_functions
                         Date time arithmetic functions for Column
                         operations
-column_datetime_functions
-                        Date time functions for Column operations
 column_math_functions   Math functions for Column operations
 column_misc_functions   Miscellaneous functions for Column operations
+column_ml_functions     ML functions for Column operations
 column_nonaggregate_functions
                         Non-aggregate functions for Column operations
 column_string_functions
@@ -96,6 +55,9 @@ column_window_functions
 corr                    corr
 count                   Count
 cov                     cov
+create_lambda           Create o.a.s.sql.expressions.LambdaFunction
+                        corresponding to transformation described by
+                        func. Used by higher order functions.
 createDataFrame         Create a SparkDataFrame
 createExternalTable     (Deprecated) Create an external table
 createOrReplaceTempView
@@ -109,16 +71,23 @@ cube                    cube
 currentDatabase         Returns the current default database
 dapply                  dapply
 dapplyCollect           dapplyCollect
+DecisionTreeClassificationModel-class
+                        S4 class that represents a
+                        DecisionTreeClassificationModel
+DecisionTreeRegressionModel-class
+                        S4 class that represents a
+                        DecisionTreeRegressionModel
 describe                describe
 dim                     Returns the dimensions of SparkDataFrame
 distinct                Distinct
 drop                    drop
 dropDuplicates          dropDuplicates
+dropFields              dropFields
+dropna                  A set of SparkDataFrame functions working with
+                        NA values
 dropTempTable           (Deprecated) Drop Temporary Table
 dropTempView            Drops the temporary view with the given view
                         name in the catalog.
-dropna                  A set of SparkDataFrame functions working with
-                        NA values
 dtypes                  DataTypes
 endsWith                endsWith
 except                  except
@@ -127,10 +96,26 @@ explain                 Explain
 filter                  Filter
 first                   Return the first row of a SparkDataFrame
 fitted                  Get fitted result from a k-means model
+FMClassificationModel-class
+                        S4 class that represents a
+                        FMClassificationModel
+FMRegressionModel-class
+                        S4 class that represents a FMRegressionModel
+FPGrowthModel-class     S4 class that represents a FPGrowthModel
 freqItems               Finding frequent items for columns, possibly
                         with false positives
 gapply                  gapply
 gapplyCollect           gapplyCollect
+GaussianMixtureModel-class
+                        S4 class that represents a GaussianMixtureModel
+GBTClassificationModel-class
+                        S4 class that represents a
+                        GBTClassificationModel
+GBTRegressionModel-class
+                        S4 class that represents a GBTRegressionModel
+GeneralizedLinearRegressionModel-class
+                        S4 class that represents a generalized linear
+                        model
 getLocalProperty        Get a local property set in this thread, or
                         'NULL' if it is missing. See
                         'setLocalProperty'.
@@ -138,6 +123,7 @@ getNumPartitions        getNumPartitions
 glm,formula,ANY,SparkDataFrame-method
                         Generalized Linear Models (R-compliant)
 group_by                GroupBy
+GroupedData-class       S4 class that represents a GroupedData
 hashCode                Compute the hashCode of an object
 head                    Head
 hint                    hint
@@ -147,13 +133,27 @@ install.spark           Download and Install Apache Spark to a Local
                         Directory
 intersect               Intersect
 intersectAll            intersectAll
+invoke_higher_order_function
+                        Invokes higher order function expression
+                        identified by name, (relative to
+                        o.a.s.sql.catalyst.expressions)
 isActive                isActive
 isLocal                 isLocal
+IsotonicRegressionModel-class
+                        S4 class that represents an
+                        IsotonicRegressionModel
 isStreaming             isStreaming
 join                    Join
+KMeansModel-class       S4 class that represents a KMeansModel
+KSTest-class            S4 class that represents an KSTest
 last                    last
 lastProgress            lastProgress
+LDAModel-class          S4 class that represents an LDAModel
 limit                   Limit
+LinearRegressionModel-class
+                        S4 class that represents a
+                        LinearRegressionModel
+LinearSVCModel-class    S4 class that represents an LinearSVCModel
 listColumns             Returns a list of columns for the given
                         table/view in the specified database
 listDatabases           Returns a list of databases available
@@ -162,8 +162,15 @@ listFunctions           Returns a list of functions registered in the
 listTables              Returns a list of tables or views in the
                         specified database
 localCheckpoint         localCheckpoint
+LogisticRegressionModel-class
+                        S4 class that represents an
+                        LogisticRegressionModel
 merge                   Merges two data frames
+MultilayerPerceptronClassificationModel-class
+                        S4 class that represents a
+                        MultilayerPerceptronClassificationModel
 mutate                  Mutate
+NaiveBayesModel-class   S4 class that represents a NaiveBayesModel
 ncol                    Returns the number of columns in a
                         SparkDataFrame
 not                     !
@@ -175,12 +182,22 @@ partitionBy             partitionBy
 persist                 Persist
 pivot                   Pivot a column of the GroupedData and perform
                         the specified aggregation.
+PowerIterationClustering-class
+                        S4 class that represents a
+                        PowerIterationClustering
 predict                 Makes predictions from a MLlib model
+PrefixSpan-class        S4 class that represents a PrefixSpan
 print.jobj              Print a JVM object reference.
 print.structField       Print a Spark StructField.
 print.structType        Print a Spark StructType.
 printSchema             Print Schema of a SparkDataFrame
 queryName               queryName
+RandomForestClassificationModel-class
+                        S4 class that represents a
+                        RandomForestClassificationModel
+RandomForestRegressionModel-class
+                        S4 class that represents a
+                        RandomForestRegressionModel
 randomSplit             randomSplit
 rangeBetween            rangeBetween
 rbind                   Union two or more SparkDataFrames
@@ -229,9 +246,14 @@ spark.addFile           Add a file or directory to be downloaded with
                         this Spark job on every node.
 spark.als               Alternating Least Squares (ALS) for
                         Collaborative Filtering
+spark.assignClusters    PowerIterationClustering
 spark.bisectingKmeans   Bisecting K-Means Clustering Model
 spark.decisionTree      Decision Tree Model for Regression and
                         Classification
+spark.findFrequentSequentialPatterns
+                        PrefixSpan
+spark.fmClassifier      Factorization Machines Classification Model
+spark.fmRegressor       Factorization Machines Regression Model
 spark.fpGrowth          FP-growth
 spark.gaussianMixture   Multivariate Gaussian Mixture Model (GMM)
 spark.gbt               Gradient Boosted Tree Model for Regression and
@@ -248,6 +270,7 @@ spark.kstest            (One-Sample) Kolmogorov-Smirnov Test
 spark.lapply            Run a function over a list of elements,
                         distributing the computations with Spark
 spark.lda               Latent Dirichlet Allocation
+spark.lm                Linear Regression Model
 spark.logit             Logistic Regression Model
 spark.mlp               Multilayer Perceptron Classification Model
 spark.naiveBayes        Naive Bayes Models
@@ -256,6 +279,7 @@ spark.randomForest      Random Forest Model for Regression and
 spark.survreg           Accelerated Failure Time (AFT) Survival
                         Regression Model
 spark.svmLinear         Linear SVM Model
+SparkDataFrame-class    S4 class that represents a SparkDataFrame
 sparkR.callJMethod      Call Java Methods
 sparkR.callJStatic      Call Static Java Methods
 sparkR.conf             Get Runtime Config from the current active
@@ -277,29 +301,40 @@ status                  status
 stopQuery               stopQuery
 storageLevel            StorageLevel
 str                     Compactly display the structure of a dataset
+StreamingQuery-class    S4 class that represents a StreamingQuery
 structField             structField
 structType              structType
 subset                  Subset
 substr                  substr
 summary                 summary
 tableNames              Table Names
+tables                  Tables
 tableToDF               Create a SparkDataFrame from a SparkSQL table
                         or view
-tables                  Tables
 take                    Take the first NUM rows of a SparkDataFrame and
                         return the results as a R data.frame
+timestamp_seconds       Date time functions for Column operations
 toJSON                  toJSON
 uncacheTable            Uncache Table
 union                   Return a new SparkDataFrame containing the
                         union of rows
+unionAll                Return a new SparkDataFrame containing the
+                        union of rows.
 unionByName             Return a new SparkDataFrame containing the
                         union of rows, matched by column names
 unpersist               Unpersist
+unresolved_named_lambda_var
+                        Create
+                        o.a.s.sql.expressions.UnresolvedNamedLambdaVariable,
+                        convert it to o.s.sql.Column and wrap with R
+                        Column. Used by higher order functions.
 windowOrderBy           windowOrderBy
 windowPartitionBy       windowPartitionBy
+WindowSpec-class        S4 class that represents a WindowSpec
 with                    Evaluate a R expression in an environment
                         constructed from a SparkDataFrame
 withColumn              WithColumn
+withField               withField
 withWatermark           withWatermark
 write.df                Save the contents of SparkDataFrame to a data
                         source.

@@ -17,21 +17,15 @@
 
 import gc
 import os
-import socket
 import sys
 from tempfile import NamedTemporaryFile
 import threading
+import pickle
 
-from pyspark.cloudpickle import print_exec
 from pyspark.java_gateway import local_connect_and_auth
-from pyspark.serializers import ChunkedStream
-from pyspark.util import _exception_message
+from pyspark.serializers import ChunkedStream, pickle_protocol
+from pyspark.util import print_exec
 
-if sys.version < '3':
-    import cPickle as pickle
-else:
-    import pickle
-    unicode = str
 
 __all__ = ['Broadcast']
 
@@ -50,11 +44,11 @@ def _from_id(bid):
 class Broadcast(object):
 
     """
-    A broadcast variable created with L{SparkContext.broadcast()}.
-    Access its value through C{.value}.
+    A broadcast variable created with :meth:`SparkContext.broadcast`.
+    Access its value through :attr:`value`.
 
-    Examples:
-
+    Examples
+    --------
     >>> from pyspark.context import SparkContext
     >>> sc = SparkContext('local', 'test')
     >>> b = sc.broadcast([1, 2, 3, 4, 5])
@@ -70,7 +64,7 @@ class Broadcast(object):
     def __init__(self, sc=None, value=None, pickle_registry=None, path=None,
                  sock_file=None):
         """
-        Should not be called directly by users -- use L{SparkContext.broadcast()}
+        Should not be called directly by users -- use :meth:`SparkContext.broadcast`
         instead.
         """
         if sc is not None:
@@ -110,12 +104,12 @@ class Broadcast(object):
 
     def dump(self, value, f):
         try:
-            pickle.dump(value, f, 2)
+            pickle.dump(value, f, pickle_protocol)
         except pickle.PickleError:
             raise
         except Exception as e:
             msg = "Could not serialize broadcast: %s: %s" \
-                  % (e.__class__.__name__, _exception_message(e))
+                  % (e.__class__.__name__, str(e))
             print_exec(sys.stderr)
             raise pickle.PicklingError(msg)
         f.close()
@@ -154,22 +148,33 @@ class Broadcast(object):
         broadcast is used after this is called, it will need to be
         re-sent to each executor.
 
-        :param blocking: Whether to block until unpersisting has completed
+        Parameters
+        ----------
+        blocking : bool, optional
+            Whether to block until unpersisting has completed
         """
         if self._jbroadcast is None:
             raise Exception("Broadcast can only be unpersisted in driver")
         self._jbroadcast.unpersist(blocking)
 
-    def destroy(self):
+    def destroy(self, blocking=False):
         """
         Destroy all data and metadata related to this broadcast variable.
         Use this with caution; once a broadcast variable has been destroyed,
-        it cannot be used again. This method blocks until destroy has
-        completed.
+        it cannot be used again.
+
+        .. versionchanged:: 3.0.0
+           Added optional argument `blocking` to specify whether to block until all
+           blocks are deleted.
+
+        Parameters
+        ----------
+        blocking : bool, optional
+            Whether to block until unpersisting has completed
         """
         if self._jbroadcast is None:
             raise Exception("Broadcast can only be destroyed in driver")
-        self._jbroadcast.destroy()
+        self._jbroadcast.destroy(blocking)
         os.unlink(self._path)
 
     def __reduce__(self):
