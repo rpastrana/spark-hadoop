@@ -55,9 +55,6 @@ column_window_functions
 corr                    corr
 count                   Count
 cov                     cov
-create_lambda           Create o.a.s.sql.expressions.LambdaFunction
-                        corresponding to transformation described by
-                        func. Used by higher order functions.
 createDataFrame         Create a SparkDataFrame
 createExternalTable     (Deprecated) Create an external table
 createOrReplaceTempView
@@ -124,7 +121,6 @@ glm,formula,ANY,SparkDataFrame-method
                         Generalized Linear Models (R-compliant)
 group_by                GroupBy
 GroupedData-class       S4 class that represents a GroupedData
-hashCode                Compute the hashCode of an object
 head                    Head
 hint                    hint
 histogram               Compute histogram statistics for given column
@@ -133,10 +129,6 @@ install.spark           Download and Install Apache Spark to a Local
                         Directory
 intersect               Intersect
 intersectAll            intersectAll
-invoke_higher_order_function
-                        Invokes higher order function expression
-                        identified by name, (relative to
-                        o.a.s.sql.catalyst.expressions)
 isActive                isActive
 isLocal                 isLocal
 IsotonicRegressionModel-class
@@ -187,9 +179,6 @@ PowerIterationClustering-class
                         PowerIterationClustering
 predict                 Makes predictions from a MLlib model
 PrefixSpan-class        S4 class that represents a PrefixSpan
-print.jobj              Print a JVM object reference.
-print.structField       Print a Spark StructField.
-print.structType        Print a Spark StructType.
 printSchema             Print Schema of a SparkDataFrame
 queryName               queryName
 RandomForestClassificationModel-class
@@ -323,11 +312,6 @@ unionAll                Return a new SparkDataFrame containing the
 unionByName             Return a new SparkDataFrame containing the
                         union of rows, matched by column names
 unpersist               Unpersist
-unresolved_named_lambda_var
-                        Create
-                        o.a.s.sql.expressions.UnresolvedNamedLambdaVariable,
-                        convert it to o.s.sql.Column and wrap with R
-                        Column. Used by higher order functions.
 windowOrderBy           windowOrderBy
 windowPartitionBy       windowPartitionBy
 WindowSpec-class        S4 class that represents a WindowSpec

@@ -10,6 +10,7 @@ Note that the C Pickler subclassing API is CPython-specific. Therefore, some
 guards present in cloudpickle.py that were written to handle PyPy specificities
 are not present in cloudpickle_fast.py
 """
+import _collections_abc
 import abc
 import copyreg
 import io
@@ -22,19 +23,19 @@ import weakref
 import typing
 
 from enum import Enum
-from collections import ChainMap
+from collections import ChainMap, OrderedDict
 
 from .compat import pickle, Pickler
 from .cloudpickle import (
     _extract_code_globals, _BUILTIN_TYPE_NAMES, DEFAULT_PROTOCOL,
-    _find_imported_submodules, _get_cell_contents, _is_importable,
+    _find_imported_submodules, _get_cell_contents, _should_pickle_by_reference,
     _builtin_type, _get_or_create_tracker_id,  _make_skeleton_class,
     _make_skeleton_enum, _extract_class_dict, dynamic_subimport, subimport,
     _typevar_reduce, _get_bases, _make_cell, _make_empty_cell, CellType,
     _is_parametrized_type_hint, PYPY, cell_set,
     parametrized_type_hint_getinitargs, _create_parametrized_type_hint,
-    builtin_code_type
-
+    builtin_code_type,
+    _make_dict_keys, _make_dict_values, _make_dict_items,
 )
 
 
@@ -243,7 +244,19 @@ def _enum_getstate(obj):
 
 def _code_reduce(obj):
     """codeobject reducer"""
-    if hasattr(obj, "co_posonlyargcount"):  # pragma: no branch
+    if hasattr(obj, "co_linetable"):  # pragma: no branch
+        # Python 3.10 and later: obj.co_lnotab is deprecated and constructor
+        # expects obj.co_linetable instead.
+        args = (
+            obj.co_argcount, obj.co_posonlyargcount,
+            obj.co_kwonlyargcount, obj.co_nlocals, obj.co_stacksize,
+            obj.co_flags, obj.co_code, obj.co_consts, obj.co_names,
+            obj.co_varnames, obj.co_filename, obj.co_name,
+            obj.co_firstlineno, obj.co_linetable, obj.co_freevars,
+            obj.co_cellvars
+        )
+    elif hasattr(obj, "co_posonlyargcount"):
+        # Backward compat for 3.9 and older
         args = (
             obj.co_argcount, obj.co_posonlyargcount,
             obj.co_kwonlyargcount, obj.co_nlocals, obj.co_stacksize,
@@ -253,6 +266,7 @@ def _code_reduce(obj):
             obj.co_cellvars
         )
     else:
+        # Backward compat for even older versions of Python
         args = (
             obj.co_argcount, obj.co_kwonlyargcount, obj.co_nlocals,
             obj.co_stacksize, obj.co_flags, obj.co_code, obj.co_consts,
@@ -338,11 +352,16 @@ def _memoryview_reduce(obj):
 
 
 def _module_reduce(obj):
-    if _is_importable(obj):
+    if _should_pickle_by_reference(obj):
         return subimport, (obj.__name__,)
     else:
-        obj.__dict__.pop('__builtins__', None)
-        return dynamic_subimport, (obj.__name__, vars(obj))
+        # Some external libraries can populate the "__builtins__" entry of a
+        # module's `__dict__` with unpicklable objects (see #316). For that
+        # reason, we do not attempt to pickle the "__builtins__" entry, and
+        # restore a default value for it at unpickling time.
+        state = obj.__dict__.copy()
+        state.pop('__builtins__', None)
+        return dynamic_subimport, (obj.__name__, state)
 
 
 def _method_reduce(obj):
@@ -395,9 +414,45 @@ def _class_reduce(obj):
         return type, (NotImplemented,)
     elif obj in _BUILTIN_TYPE_NAMES:
         return _builtin_type, (_BUILTIN_TYPE_NAMES[obj],)
-    elif not _is_importable(obj):
+    elif not _should_pickle_by_reference(obj):
         return _dynamic_class_reduce(obj)
     return NotImplemented
+
+
+def _dict_keys_reduce(obj):
+    # Safer not to ship the full dict as sending the rest might
+    # be unintended and could potentially cause leaking of
+    # sensitive information
+    return _make_dict_keys, (list(obj), )
+
+
+def _dict_values_reduce(obj):
+    # Safer not to ship the full dict as sending the rest might
+    # be unintended and could potentially cause leaking of
+    # sensitive information
+    return _make_dict_values, (list(obj), )
+
+
+def _dict_items_reduce(obj):
+    return _make_dict_items, (dict(obj), )
+
+
+def _odict_keys_reduce(obj):
+    # Safer not to ship the full dict as sending the rest might
+    # be unintended and could potentially cause leaking of
+    # sensitive information
+    return _make_dict_keys, (list(obj), True)
+
+
+def _odict_values_reduce(obj):
+    # Safer not to ship the full dict as sending the rest might
+    # be unintended and could potentially cause leaking of
+    # sensitive information
+    return _make_dict_values, (list(obj), True)
+
+
+def _odict_items_reduce(obj):
+    return _make_dict_items, (dict(obj), True)
 
 
 # COLLECTIONS OF OBJECTS STATE SETTERS
@@ -473,6 +528,13 @@ class CloudPickler(Pickler):
     _dispatch_table[types.MappingProxyType] = _mappingproxy_reduce
     _dispatch_table[weakref.WeakSet] = _weakset_reduce
     _dispatch_table[typing.TypeVar] = _typevar_reduce
+    _dispatch_table[_collections_abc.dict_keys] = _dict_keys_reduce
+    _dispatch_table[_collections_abc.dict_values] = _dict_values_reduce
+    _dispatch_table[_collections_abc.dict_items] = _dict_items_reduce
+    _dispatch_table[type(OrderedDict().keys())] = _odict_keys_reduce
+    _dispatch_table[type(OrderedDict().values())] = _odict_values_reduce
+    _dispatch_table[type(OrderedDict().items())] = _odict_items_reduce
+
 
     dispatch_table = ChainMap(_dispatch_table, copyreg.dispatch_table)
 
@@ -497,7 +559,7 @@ class CloudPickler(Pickler):
         As opposed to cloudpickle.py, There no special handling for builtin
         pypy functions because cloudpickle_fast is CPython-specific.
         """
-        if _is_importable(obj):
+        if _should_pickle_by_reference(obj):
             return NotImplemented
         else:
             return self._dynamic_function_reduce(obj)
@@ -701,7 +763,7 @@ class CloudPickler(Pickler):
                 )
             elif name is not None:
                 Pickler.save_global(self, obj, name=name)
-            elif not _is_importable(obj, name=name):
+            elif not _should_pickle_by_reference(obj, name=name):
                 self._save_reduce_pickle5(*_dynamic_class_reduce(obj), obj=obj)
             else:
                 Pickler.save_global(self, obj, name=name)
@@ -713,7 +775,7 @@ class CloudPickler(Pickler):
             Determines what kind of function obj is (e.g. lambda, defined at
             interactive prompt, etc) and handles the pickling appropriately.
             """
-            if _is_importable(obj, name=name):
+            if _should_pickle_by_reference(obj, name=name):
                 return Pickler.save_global(self, obj, name=name)
             elif PYPY and isinstance(obj.__code__, builtin_code_type):
                 return self.save_pypy_builtin_func(obj)

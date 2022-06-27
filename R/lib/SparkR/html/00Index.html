@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head><title>R: R Front End for 'Apache Spark'</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
 <link rel="stylesheet" type="text/css" href="R.css" />
-</head><body>
+</head><body><div class="container">
 <h1> R Front End for 'Apache Spark'
 <img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
 </h1>
@@ -11,9 +12,10 @@
 <div style="text-align: center;">
 <a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
 <a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
-</div><h2>Documentation for package &lsquo;SparkR&rsquo; version 3.1.1</h2>
+</div><h2>Documentation for package &lsquo;SparkR&rsquo; version 3.3.0</h2>
 
 <ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
 </ul>
 
 <h2>Help Pages</h2>
@@ -257,6 +259,14 @@
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">bitwiseNOT-method</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">bitwise_not</a></td>
+<td>Non-aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">bitwise_not-method</a></td>
+<td>Non-aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_string_functions.html">bit_length</a></td>
+<td>String functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_string_functions.html">bit_length-method</a></td>
+<td>String functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="broadcast.html">broadcast</a></td>
 <td>broadcast</td></tr>
 <tr><td style="width: 25%;"><a href="broadcast.html">broadcast-method</a></td>
@@ -396,6 +406,10 @@
 <td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">cosh-method</a></td>
 <td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">cot</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">cot-method</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="count.html">count</a></td>
 <td>Count</td></tr>
 <tr><td style="width: 25%;"><a href="count.html">count-method</a></td>
@@ -405,6 +419,10 @@
 <tr><td style="width: 25%;"><a href="column_aggregate_functions.html">countDistinct</a></td>
 <td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_aggregate_functions.html">countDistinct-method</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">count_distinct</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">count_distinct-method</a></td>
 <td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="cov.html">cov</a></td>
 <td>cov</td></tr>
@@ -436,8 +454,6 @@
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">create_array-method</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
-<tr><td style="width: 25%;"><a href="create_lambda.html">create_lambda</a></td>
-<td>Create o.a.s.sql.expressions.LambdaFunction corresponding to transformation described by func. Used by higher order functions.</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">create_map</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">create_map-method</a></td>
@@ -450,6 +466,10 @@
 <td>Computes a pair-wise frequency table of the given columns</td></tr>
 <tr><td style="width: 25%;"><a href="crosstab.html">crosstab-method</a></td>
 <td>Computes a pair-wise frequency table of the given columns</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">csc</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">csc-method</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="cube.html">cube</a></td>
 <td>cube</td></tr>
 <tr><td style="width: 25%;"><a href="cube.html">cube-method</a></td>
@@ -765,8 +785,6 @@
 <td>Miscellaneous functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_misc_functions.html">hash-method</a></td>
 <td>Miscellaneous functions for Column operations</td></tr>
-<tr><td style="width: 25%;"><a href="hashCode.html">hashCode</a></td>
-<td>Compute the hashCode of an object</td></tr>
 <tr><td style="width: 25%;"><a href="head.html">head</a></td>
 <td>Head</td></tr>
 <tr><td style="width: 25%;"><a href="head.html">head-method</a></td>
@@ -800,6 +818,8 @@
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">ifelse-method</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="columnfunctions.html">ilike</a></td>
+<td>A set of operations working with SparkDataFrame columns</td></tr>
 <tr><td style="width: 25%;"><a href="column_string_functions.html">initcap</a></td>
 <td>String functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_string_functions.html">initcap-method</a></td>
@@ -826,8 +846,6 @@
 <td>intersectAll</td></tr>
 <tr><td style="width: 25%;"><a href="intersectAll.html">intersectAll-method</a></td>
 <td>intersectAll</td></tr>
-<tr><td style="width: 25%;"><a href="invoke_higher_order_function.html">invoke_higher_order_function</a></td>
-<td>Invokes higher order function expression identified by name, (relative to o.a.s.sql.catalyst.expressions)</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">is.nan</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">is.nan-method</a></td>
@@ -984,6 +1002,10 @@
 <h2><a name="M">-- M --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="column_datetime_functions.html">make_date</a></td>
+<td>Date time functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_datetime_functions.html">make_date-method</a></td>
+<td>Date time functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_collection_functions.html">map_concat</a></td>
 <td>Collection functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_collection_functions.html">map_concat-method</a></td>
@@ -1020,6 +1042,10 @@
 <td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_aggregate_functions.html">max-method</a></td>
 <td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">max_by</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">max_by-method</a></td>
+<td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_misc_functions.html">md5</a></td>
 <td>Miscellaneous functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_misc_functions.html">md5-method</a></td>
@@ -1040,6 +1066,10 @@
 <td>Date time functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_datetime_functions.html">minute-method</a></td>
 <td>Date time functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">min_by</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">min_by-method</a></td>
+<td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">monotonically_increasing_id</a></td>
 <td>Non-aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_nonaggregate_functions.html">monotonically_increasing_id-method</a></td>
@@ -1122,6 +1152,10 @@
 <h2><a name="O">-- O --</a></h2>
 
 <table width="100%">
+<tr><td style="width: 25%;"><a href="column_string_functions.html">octet_length</a></td>
+<td>String functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_string_functions.html">octet_length-method</a></td>
+<td>String functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="orderBy.html">orderBy</a></td>
 <td>Ordering Columns in a WindowSpec</td></tr>
 <tr><td style="width: 25%;"><a href="arrange.html">orderBy-method</a></td>
@@ -1219,12 +1253,6 @@
 <td>Linear SVM Model</td></tr>
 <tr><td style="width: 25%;"><a href="PrefixSpan-class.html">PrefixSpan-class</a></td>
 <td>S4 class that represents a PrefixSpan</td></tr>
-<tr><td style="width: 25%;"><a href="print.jobj.html">print.jobj</a></td>
-<td>Print a JVM object reference.</td></tr>
-<tr><td style="width: 25%;"><a href="print.structField.html">print.structField</a></td>
-<td>Print a Spark StructField.</td></tr>
-<tr><td style="width: 25%;"><a href="print.structType.html">print.structType</a></td>
-<td>Print a Spark StructType.</td></tr>
 <tr><td style="width: 25%;"><a href="spark.decisionTree.html">print.summary.DecisionTreeClassificationModel</a></td>
 <td>Decision Tree Model for Regression and Classification</td></tr>
 <tr><td style="width: 25%;"><a href="spark.decisionTree.html">print.summary.DecisionTreeRegressionModel</a></td>
@@ -1245,6 +1273,10 @@
 <td>Print Schema of a SparkDataFrame</td></tr>
 <tr><td style="width: 25%;"><a href="printSchema.html">printSchema-method</a></td>
 <td>Print Schema of a SparkDataFrame</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">product</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">product-method</a></td>
+<td>Aggregate functions for Column operations</td></tr>
 </table>
 
 <h2><a name="Q">-- Q --</a></h2>
@@ -1424,6 +1456,10 @@
 <td>Aggregate functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_aggregate_functions.html">sd-method</a></td>
 <td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">sec</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">sec-method</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_datetime_functions.html">second</a></td>
 <td>Date time functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_datetime_functions.html">second-method</a></td>
@@ -1458,15 +1494,27 @@
 <td>Miscellaneous functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftLeft</a></td>
 <td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftleft</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftLeft-method</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftleft-method</a></td>
 <td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftRight</a></td>
 <td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftright</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftRight-method</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftright-method</a></td>
 <td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftRightUnsigned</a></td>
 <td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftrightunsigned</a></td>
+<td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_math_functions.html">shiftRightUnsigned-method</a></td>
+<td>Math functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_math_functions.html">shiftrightunsigned-method</a></td>
 <td>Math functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="show.html">show</a></td>
 <td>show</td></tr>
@@ -1786,6 +1834,10 @@
 <td>Linear SVM Model</td></tr>
 <tr><td style="width: 25%;"><a href="summary.html">summary-method</a></td>
 <td>summary</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">sum_distinct</a></td>
+<td>Aggregate functions for Column operations</td></tr>
+<tr><td style="width: 25%;"><a href="column_aggregate_functions.html">sum_distinct-method</a></td>
+<td>Aggregate functions for Column operations</td></tr>
 </table>
 
 <h2><a name="T">-- T --</a></h2>
@@ -1912,8 +1964,6 @@
 <td>Unpersist</td></tr>
 <tr><td style="width: 25%;"><a href="unpersist.html">unpersist-method</a></td>
 <td>Unpersist</td></tr>
-<tr><td style="width: 25%;"><a href="unresolved_named_lambda_var.html">unresolved_named_lambda_var</a></td>
-<td>Create o.a.s.sql.expressions.UnresolvedNamedLambdaVariable, convert it to o.s.sql.Column and wrap with R Column. Used by higher order functions.</td></tr>
 <tr><td style="width: 25%;"><a href="column_string_functions.html">upper</a></td>
 <td>String functions for Column operations</td></tr>
 <tr><td style="width: 25%;"><a href="column_string_functions.html">upper-method</a></td>
@@ -2116,4 +2166,4 @@
 <tr><td style="width: 25%;"><a href="subset.html">[[&lt;--method</a></td>
 <td>Subset</td></tr>
 </table>
-</body></html>
+</div></body></html>
